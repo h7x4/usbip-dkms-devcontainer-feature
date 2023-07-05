@@ -13,6 +13,7 @@
 
     "options": {
         "kernelVersion": {
+            "description": "Kernel version to use for the source code of the USBIP modules. If not specified, the feature will try to determine the kernel version automatically, but this is not guaranteed to work.",
             "type": "string",
             "proposals": [
                 "v4.4",
@@ -28,7 +29,7 @@
             "default": ""
         },
         "enableVudc": {
-            "description": "Enable Virtual USB Device Controller (VUDC) support. This requires the kernel to have CONFIG_USB_GADGET enabled, which linux-azure (GitHub Codespaces) does not have.",
+            "description": "Enable Virtual USB Device Controller (VUDC) support. This requires the kernel to have `CONFIG_USB_GADGET` enabled, which `linux-azure` (kernel used for GitHub Codespaces VMs) does not have by default.",
             "type": "boolean",
             "default": false
         },
