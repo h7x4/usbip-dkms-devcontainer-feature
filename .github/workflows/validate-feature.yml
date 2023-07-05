@@ -1,0 +1,19 @@
+name: "Validate dev-container feature"
+on:
+  push:
+    paths:
+      - 'features/**'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: "Checkout"
+        uses: actions/checkout@v3
+      -
+        name: "Build"
+        uses: devcontainers/action@v1
+        with:
+          base-path-to-features: "./features"
+          validate-only: true
