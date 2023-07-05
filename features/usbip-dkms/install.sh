@@ -2,6 +2,7 @@
 
 KERNEL_VERSION="${KERNELVERSION:-}"
 ENABLE_VUDC="${ENABLEVUDC:-false}"
+AUTO_MODPROBE="${AUTOMODPROBE:-true}"
 
 set -euo
 
@@ -18,9 +19,10 @@ apt-get install -y --no-install-recommends \
   dkms \
   git \
   "linux-headers-$(uname -r)" \
+  "linux-tools-$(uname -r)" \
   subversion
 
-# Trick to be able to only download the usbip folder
+# This is a trick to download only the usbip directory, and not the entire project.
 svn export "https://github.com/torvalds/linux/tags/${KERNEL_VERSION}/drivers/usb/usbip" "/usr/src/usbip-${KERNEL_VERSION}"
 install -m644 dkms.conf "/usr/src/usbip-${KERNEL_VERSION}/dkms.conf"
 
@@ -45,3 +47,9 @@ if ! dkms build -m usbip -v "${KERNEL_VERSION}"; then
 fi
 
 dkms install -m usbip -v "${KERNEL_VERSION}"
+
+if [ "$AUTO_MODPROBE" != "false" ]; then
+  modprobe usbip-core
+  modprobe usbip-host
+  modprobe vhci-hcd
+fi
