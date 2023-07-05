@@ -36,5 +36,12 @@ if [ -n "$ENABLE_VUDC" ]; then
 fi
 
 dkms add -m usbip -v "${KERNEL_VERSION}"
-dkms build -m usbip -v "${KERNEL_VERSION}"
+
+if ! dkms build -m usbip -v "${KERNEL_VERSION}"; then
+  >&2 echo "Could not build usbip kernel module"
+  >&2 echo "build/make.log:"
+  cat /var/lib/dkms/usbip/"${KERNEL_VERSION}"/build/make.log >&2
+  exit 1
+fi
+
 dkms install -m usbip -v "${KERNEL_VERSION}"
