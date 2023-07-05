@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 KERNEL_VERSION="${KERNELVERSION:-}"
+ENABLE_VUDC="${ENABLEVUDC:-}"
 
 set -euo
 
@@ -11,8 +12,8 @@ if [ -z "$KERNEL_VERSION" ]; then
   fi
 fi
 
-apt update
-apt install -y --no-install-recommends \
+apt-get update
+apt-get install -y --no-install-recommends \
   ca-certificates \
   dkms \
   git \
@@ -28,7 +29,11 @@ sed -i "s|#MODULE_VERSION#|${KERNEL_VERSION}|" "/usr/src/usbip-${KERNEL_VERSION}
 export CONFIG_USBIP_CORE=m
 export CONFIG_VHCI_HCD=m
 export CONFIG_USBIP_HOST=m
-export CONFIG_USBIP_VUDC=m
+
+if [ -n "$ENABLE_VUDC" ]; then
+  export CONFIG_USBIP_VUDC=m
+  sed -i "s|# ||g" "/usr/src/usbip-${KERNEL_VERSION}/dkms.conf"
+fi
 
 dkms add -m usbip -v "${KERNEL_VERSION}"
 dkms build -m usbip -v "${KERNEL_VERSION}"

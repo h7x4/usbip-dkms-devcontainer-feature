@@ -1,7 +1,7 @@
 {
     "name": "USBIP DKMS Module",
     "id": "usbip-dkms",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "description": "DKMS module for USBIP",
 
     "installsAfter": [
@@ -23,6 +23,11 @@
                 "v6.4"
             ],
             "default": ""
+        },
+        "enableVudc": {
+            "description": "Enable Virtual USB Device Controller (VUDC) support. This requires the kernel to have CONFIG_USB_GADGET enabled, which linux-azure (GitHub Codespaces) does not have.",
+            "type": "boolean",
+            "default": false
         }
     }
 }
