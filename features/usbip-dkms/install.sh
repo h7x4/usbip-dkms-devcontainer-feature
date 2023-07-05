@@ -27,7 +27,7 @@ install -m644 dkms.conf "/usr/src/usbip-${KERNEL_VERSION}/dkms.conf"
 sed -i "s|#MODULE_VERSION#|${KERNEL_VERSION}|" "/usr/src/usbip-${KERNEL_VERSION}/dkms.conf"
 
 export CONFIG_USBIP_CORE=m
-export CONFIG_VHCI_HCD=m
+export CONFIG_USBIP_VHCI_HCD=m
 export CONFIG_USBIP_HOST=m
 
 if [ -n "$ENABLE_VUDC" ]; then
