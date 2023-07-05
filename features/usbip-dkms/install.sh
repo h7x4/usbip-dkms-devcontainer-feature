@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 KERNEL_VERSION="${KERNELVERSION:-}"
-ENABLE_VUDC="${ENABLEVUDC:-}"
+ENABLE_VUDC="${ENABLEVUDC:-false}"
 
 set -euo
 
@@ -30,7 +30,7 @@ export CONFIG_USBIP_CORE=m
 export CONFIG_USBIP_VHCI_HCD=m
 export CONFIG_USBIP_HOST=m
 
-if [ -n "$ENABLE_VUDC" ]; then
+if [ "$ENABLE_VUDC" != "false" ]; then
   export CONFIG_USBIP_VUDC=m
   sed -i "s|# ||g" "/usr/src/usbip-${KERNEL_VERSION}/dkms.conf"
 fi
