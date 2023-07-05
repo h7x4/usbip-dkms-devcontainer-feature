@@ -1,7 +1,7 @@
 {
     "name": "USBIP DKMS Module",
     "id": "usbip-dkms",
-    "version": "0.3.0",
+    "version": "0.3.1",
     "description": "DKMS module for USBIP",
 
     "installsAfter": [
