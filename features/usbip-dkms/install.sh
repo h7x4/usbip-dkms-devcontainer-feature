@@ -52,4 +52,7 @@ if [ "$AUTO_MODPROBE" != "false" ]; then
   modprobe usbip-core
   modprobe usbip-host
   modprobe vhci-hcd
+  if [ "$ENABLE_VUDC" != "false" ]; then
+    modprobe usbip-vudc
+  fi
 fi
