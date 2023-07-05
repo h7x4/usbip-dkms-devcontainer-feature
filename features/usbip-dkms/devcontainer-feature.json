@@ -8,6 +8,9 @@
         "ghcr.io/devcontainers/features/common-utils"
     ],
 
+    "capAdd": [ "SYS_MODULE" ],
+    "securityOpt": [ "seccomp=unconfined" ],
+
     "options": {
         "kernelVersion": {
             "type": "string",
