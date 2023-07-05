@@ -17,6 +17,7 @@ DKMS module for USBIP
 |-----|-----|-----|-----|
 | kernelVersion | - | string | - |
 | enableVudc | Enable Virtual USB Device Controller (VUDC) support. This requires the kernel to have CONFIG_USB_GADGET enabled, which linux-azure (GitHub Codespaces) does not have. | boolean | false |
+| autoModprobe | Automatically modprobe all modules after installation. | boolean | true |
 
 
 
