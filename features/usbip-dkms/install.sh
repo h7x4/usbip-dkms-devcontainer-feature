@@ -48,11 +48,18 @@ fi
 
 dkms install -m usbip -v "${KERNEL_VERSION}"
 
+mkdir -p /opt/usbip-dkms
+
+echo "#!/usr/bin/env bash" > /opt/usbip-dkms/post-start.sh
+chmod +x /opt/usbip-dkms/post-start.sh
+
 if [ "$AUTO_MODPROBE" != "false" ]; then
-  modprobe usbip-core
-  modprobe usbip-host
-  modprobe vhci-hcd
+  {
+    echo "modprobe usbip-core"
+    echo "modprobe usbip-host"
+    echo "modprobe vhci-hcd"
+  } >> /opt/usbip-dkms/post-start.sh
   if [ "$ENABLE_VUDC" != "false" ]; then
-    modprobe usbip-vudc
+    echo "modprobe usbip-vudc" >>  /opt/usbip-dkms/post-start.sh
   fi
 fi

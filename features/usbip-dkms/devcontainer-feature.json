@@ -11,6 +11,8 @@
     "capAdd": [ "SYS_MODULE" ],
     "securityOpt": [ "seccomp=unconfined" ],
 
+    "postStartCommand": "/opt/usbip-dkms/post-start.sh",
+
     "options": {
         "kernelVersion": {
             "description": "Kernel version to use for the source code of the USBIP modules. If not specified, the feature will try to determine the kernel version automatically, but this is not guaranteed to work.",
